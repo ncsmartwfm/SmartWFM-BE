@@ -10,8 +10,30 @@ public class InterviewFeedback {
     @Id
     @UuidGenerator
     private String Id;
-    @JsonProperty("interviewFeedbackId")
-    private String demandId;
+     public String getCandidateId() {
+        return candidateId;
+    }
+
+    public void setCandidateId(String candidateId) {
+        this.candidateId = candidateId;
+    }
+
+    public String getPanelId() {
+        return panelId;
+    }
+
+    public void setPanelId(String panelId) {
+        this.panelId = panelId;
+    }
+
+    public double getMatchPercentage() {
+        return matchPercentage;
+    }
+
+    public void setMatchPercentage(double matchPercentage) {
+        this.matchPercentage = matchPercentage;
+    }
+
     @JsonProperty("candidateId")
     private String candidateId;
     @JsonProperty("panelId")
