@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:8080/")
 public class LineManagerReportsController {
     @Autowired
     private DemandDaoService demandDaoService;
