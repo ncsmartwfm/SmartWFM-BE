@@ -9,5 +9,4 @@ public class SmartWfmApplication {
     public static void main(String[] args) {
         SpringApplication.run(SmartWfmApplication.class, args);
     }
-
 }
