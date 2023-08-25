@@ -1,20 +1,27 @@
 package com.netcracker.hackathon.smartwfm.common.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.netcracker.hackathon.smartwfm.common.service.AttributeEncryptor;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name="users")
+@Table(name="Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty("Id")
     private Long id;
+    @JsonProperty("userName")
     private String userName;
-
-    public User(String userName, String password, String fullName) {
-        this.userName = userName;
-        this.password = password;
-        this.fullName = fullName;
-    }
+    @JsonProperty("password")
+    @Convert(converter = AttributeEncryptor.class)
+    private String password;
+    @JsonProperty("emailId")
+    private String emailId;
+    @JsonProperty("roles")
+    private List<String> role;
 
     public User() {
 
@@ -44,14 +51,19 @@ public class User {
         this.password = password;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
-    private String password;
-    private String fullName;
+    public List<String> getRole() {
+        return role;
+    }
+
+    public void setRole(List<String> role) {
+        this.role = role;
+    }
 }
