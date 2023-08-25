@@ -7,11 +7,32 @@ import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 public class InterviewFeedback {
+    public String getDecision() {
+        return decision;
+    }
+
+    public void setDecision(String decision) {
+        this.decision = decision;
+    }
+
     @Id
     @UuidGenerator
     private String Id;
-    @JsonProperty("interviewFeedbackId")
-    private String demandId;
+     public String getCandidateId() {
+        return candidateId;
+    }
+
+    public void setCandidateId(String candidateId) {
+        this.candidateId = candidateId;
+    }
+
+    public String getPanelId() {
+        return panelId;
+    }
+
+    public void setPanelId(String panelId) {
+        this.panelId = panelId;
+    }
     @JsonProperty("candidateId")
     private String candidateId;
     @JsonProperty("panelId")
@@ -26,7 +47,7 @@ public class InterviewFeedback {
     }
 
     @JsonProperty("decision")
-    private double matchPercentage;
+    private String decision;
 
     public InterviewFeedback() {
     }
