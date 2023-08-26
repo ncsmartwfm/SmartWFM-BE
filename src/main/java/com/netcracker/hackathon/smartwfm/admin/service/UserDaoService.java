@@ -12,8 +12,8 @@ public class UserDaoService {
 
     // TODO go for password Encryption from the UI and set the encrypted password
     // TODO in the table instead of plain string
-    public User getAuthenticatedUser(String userName, String password) {
-        User user = userRepository.findUserByUserName(userName);
+    public User getAuthenticatedUser(String emailId, String password) {
+        User user = userRepository.findUserByEmailId(emailId);
         if(user.getPassword().equals(password)) {
             return user;
         }
