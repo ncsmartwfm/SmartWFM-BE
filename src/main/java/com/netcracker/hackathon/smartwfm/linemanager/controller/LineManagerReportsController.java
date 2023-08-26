@@ -101,7 +101,7 @@ public class LineManagerReportsController {
         return candidateDaoService.getMatchedDemandsForCandidateById(candidateId);
     }
 
-    @PostMapping("candidates/match")
+    @PutMapping("candidates/match")
     public ResponseEntity<DemandCandidateMatch> updateLineManagerRecommendation(@RequestBody DemandCandidateMatch demandCandidateMatch) {
         demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(demandCandidateMatch);
         return new ResponseEntity<>(demandCandidateMatch, HttpStatus.CREATED);
