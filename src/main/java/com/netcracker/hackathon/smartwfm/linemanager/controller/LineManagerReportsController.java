@@ -71,6 +71,12 @@ public class LineManagerReportsController {
         return new ResponseEntity<>(candidate, HttpStatus.CREATED);
     }
 
+    @PutMapping("/candidates")
+    public ResponseEntity<Candidate> updateCandidate(@Validated @RequestBody Candidate candidate) {
+        candidateDaoService.save(candidate);
+        return new ResponseEntity<>(candidate, HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/demands/{Id}")
     public ResponseEntity<Object> deleteDemandById(@PathVariable String Id) {
         Demand demandById = demandDaoService.getDemandById(Id);
