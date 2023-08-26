@@ -5,6 +5,7 @@ import com.netcracker.hackathon.smartwfm.linemanager.dao.Demand;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.DemandCandidateMatch;
 import com.netcracker.hackathon.smartwfm.linemanager.exception.CandidateNotFoundException;
 import com.netcracker.hackathon.smartwfm.linemanager.service.CandidateDaoService;
+import com.netcracker.hackathon.smartwfm.linemanager.service.DemandCandidateMatchDaoService;
 import com.netcracker.hackathon.smartwfm.linemanager.service.DemandDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ public class LineManagerReportsController {
     private DemandDaoService demandDaoService;
     @Autowired
     private CandidateDaoService candidateDaoService;
+    @Autowired
+    private DemandCandidateMatchDaoService demandCandidateMatchDaoService;
 
     @GetMapping("/demands")
     public List<Demand> getOpenDemands() {
@@ -74,5 +77,11 @@ public class LineManagerReportsController {
     @GetMapping("/candidates/match/{candidateId}")
     public List<DemandCandidateMatch> getMatchedDemandWithCandidateId(@PathVariable String candidateId) {
         return candidateDaoService.getMatchedDemandsForCandidateById(candidateId);
+    }
+
+    @PostMapping("candidates/match")
+    public ResponseEntity<DemandCandidateMatch> updateLineManagerRecommendation(@RequestBody DemandCandidateMatch demandCandidateMatch) {
+        demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(demandCandidateMatch);
+        return new ResponseEntity<>(demandCandidateMatch, HttpStatus.CREATED);
     }
 }
