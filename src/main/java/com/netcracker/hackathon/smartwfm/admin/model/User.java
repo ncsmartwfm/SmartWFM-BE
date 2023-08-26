@@ -15,11 +15,13 @@ public class User {
     @JsonProperty("Id")
     private Long id;
     @JsonProperty("userName")
+    @Column(unique = true, nullable = false)
     private String userName;
     @JsonProperty("password")
     @Convert(converter = AttributeEncryptor.class)
     private String password;
     @JsonProperty("emailId")
+    @Column(unique = true, nullable = false)
     private String emailId;
     @JsonProperty("roles")
     @NotNull(message = "Role cannot be empty for a user")
