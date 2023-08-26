@@ -22,8 +22,8 @@ public class AdminController {
 
     // TODO get an encrypted password from UI
     @GetMapping("/users")
-    public List<String> authenticateUserCredentials(@RequestParam String userName, @RequestParam String password) {
-        User user = userDaoService.getAuthenticatedUser(userName, password);
+    public List<String> authenticateUserCredentials(@RequestParam String emailId, @RequestParam String password) {
+        User user = userDaoService.getAuthenticatedUser(emailId, password);
         return user.getRole();
     }
 }
