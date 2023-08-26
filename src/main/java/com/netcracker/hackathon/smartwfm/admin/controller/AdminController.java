@@ -3,6 +3,7 @@ package com.netcracker.hackathon.smartwfm.admin.controller;
 import com.netcracker.hackathon.smartwfm.admin.model.User;
 import com.netcracker.hackathon.smartwfm.admin.service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,9 @@ public class AdminController {
     private UserDaoService userDaoService;
 
     @PostMapping("/users")
-    public ResponseEntity<Object> save(@Validated @RequestBody User user) {
+    public ResponseEntity<User> save(@Validated @RequestBody User user) {
         userDaoService.save(user);
-        return ResponseEntity.created(null).build();
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     // TODO get an encrypted password from UI
