@@ -39,6 +39,32 @@ public class ProfileMatcherService {
         return demandCandidateMatch;
     }
 
+    public DemandCandidateMatch calculateDemandCandidateMatchingPercentage(Candidate candidate, Demand demand) {
+        DemandCandidateMatch demandCandidateMatch = new DemandCandidateMatch();
+        demandCandidateMatch.setFirstName(candidate.getFirstName());
+        demandCandidateMatch.setLastName(candidate.getLastName());
+        demandCandidateMatch.setProjectName(demand.getProjectName());
+        demandCandidateMatch.setProjectRole(demand.getProjectRole());
+        demandCandidateMatch.setRecommendation(false);
+        List<String> candidateSkills = candidate.getSkillSet();
+        int candidateExperience = candidate.getYearsOfExperience();
+
+        List<String> requiredSkills = demand.getDesiredSkillSet();
+        int requiredExperience = demand.getDesiredYearsOfExperience();
+        double skillMatchPercentage = (double) countMatchingSkills(requiredSkills, candidateSkills) / requiredSkills.size() * 100;
+        double experienceMatchPercentage  = 0.0;
+        if(candidateExperience > requiredExperience) {
+            experienceMatchPercentage = 100;
+        } else {
+            experienceMatchPercentage = (double) requiredExperience / candidateExperience * 100;
+        }
+        int overallMatchingPercentage = (int) ((skillMatchPercentage + experienceMatchPercentage) / 2);
+        demandCandidateMatch.setCandidateId(candidate.getCandidateId());
+        demandCandidateMatch.setDemandId(demand.getDemandId());
+        demandCandidateMatch.setMatchPercentage(overallMatchingPercentage);
+        return demandCandidateMatch;
+    }
+
     public int countMatchingSkills(List<String> toBeMatchedSkills, List<String> toBeMatchedAgainstSkills) {
         int count = 0;
         for (String skill : toBeMatchedAgainstSkills) {
