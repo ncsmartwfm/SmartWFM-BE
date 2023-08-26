@@ -37,10 +37,20 @@ public class LineManagerReportsController {
     @GetMapping("/candidates/{Id}")
     public Candidate getCandidateBydId(@PathVariable String Id) {
         Candidate candidate = candidateDaoService.getCandidateById(Id);
-        if(candidate == null) {
-            throw new CandidateNotFoundException("Candidate with Id: "+Id+" is not found");
+        if (candidate == null) {
+            throw new CandidateNotFoundException("Candidate with Id: " + Id + " is not found");
         }
         return candidate;
+    }
+
+    @GetMapping("/candidates/{lineManagerEmailId}")
+    public List<Candidate> getCandidateByLineManagerEmail(@PathVariable String emailId) {
+        return candidateDaoService.getCandidatesByLineManagerEmailId(emailId);
+    }
+
+    @GetMapping("/candidates/{emailId}")
+    public Candidate getCandidateByEmailId(@PathVariable String emailId) {
+        return candidateDaoService.getCandidateByEmailId(emailId);
     }
 
     @PostMapping("/demands")
@@ -58,7 +68,7 @@ public class LineManagerReportsController {
     @DeleteMapping("/demands/{Id}")
     public ResponseEntity<Object> deleteDemandById(@PathVariable String Id) {
         Demand demandById = demandDaoService.getDemandById(Id);
-        if(demandById == null) {
+        if (demandById == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         demandDaoService.deleteDemandById(Id);
@@ -67,7 +77,7 @@ public class LineManagerReportsController {
 
     @DeleteMapping("/candidates/{Id}")
     public ResponseEntity<Object> deleteCandidateById(@PathVariable String Id) {
-        if(null == candidateDaoService.getCandidateById(Id)) {
+        if (null == candidateDaoService.getCandidateById(Id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         candidateDaoService.deleteCandidateById(Id);
@@ -84,4 +94,5 @@ public class LineManagerReportsController {
         demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(demandCandidateMatch);
         return new ResponseEntity<>(demandCandidateMatch, HttpStatus.CREATED);
     }
+
 }

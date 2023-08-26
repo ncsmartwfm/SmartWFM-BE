@@ -25,7 +25,7 @@ public class DemandCandidateMatch {
     @JsonProperty("match")
     private int matchPercentage;
     @JsonProperty("recommendation")
-    private boolean LineManagerRecommendation;
+    private boolean LineManagerRecommendation = false;
 
     public String getId() {
         return Id;
