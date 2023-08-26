@@ -6,6 +6,7 @@ import com.netcracker.hackathon.smartwfm.linemanager.exception.CandidateNotFound
 import com.netcracker.hackathon.smartwfm.linemanager.service.CandidateDaoService;
 import com.netcracker.hackathon.smartwfm.linemanager.service.DemandDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -39,24 +40,34 @@ public class LineManagerReportsController {
     }
 
     @PostMapping("/demands")
-    public void createDemand(@Validated @RequestBody Demand demand) {
+    public ResponseEntity<Demand> createDemand(@Validated @RequestBody Demand demand) {
         demandDaoService.save(demand);
+        return new ResponseEntity<>(demand, HttpStatus.CREATED);
     }
 
     @PostMapping("/candidates")
     public ResponseEntity<Candidate> createCandidate(@Validated @RequestBody Candidate candidate) {
         candidateDaoService.save(candidate);
-        return ResponseEntity.created(null).build();
+        return new ResponseEntity<>(candidate, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/demands/{Id}")
-    public void deleteDemandById(@PathVariable String Id) {
+    public ResponseEntity<Object> deleteDemandById(@PathVariable String Id) {
+        Demand demandById = demandDaoService.getDemandById(Id);
+        if(demandById == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         demandDaoService.deleteDemandById(Id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/candidates/{Id}")
-    public void deleteCandidateById(@PathVariable String Id) {
+    public ResponseEntity<Object> deleteCandidateById(@PathVariable String Id) {
+        if(null == candidateDaoService.getCandidateById(Id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         candidateDaoService.deleteCandidateById(Id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/candidates/match/{candidateId}")
