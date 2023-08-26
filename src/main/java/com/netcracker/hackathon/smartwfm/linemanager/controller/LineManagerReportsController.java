@@ -103,8 +103,10 @@ public class LineManagerReportsController {
 
     @PutMapping("candidates/match")
     public ResponseEntity<DemandCandidateMatch> updateLineManagerRecommendation(@RequestBody DemandCandidateMatch demandCandidateMatch) {
-        demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(demandCandidateMatch);
-        return new ResponseEntity<>(demandCandidateMatch, HttpStatus.CREATED);
+        DemandCandidateMatch demandCandidateMatchToUpdate = demandCandidateMatchDaoService.findByCandidateIdAndDemandId(demandCandidateMatch.getCandidateId(), demandCandidateMatch.getDemandId());
+        demandCandidateMatchToUpdate.setLineManagerRecommendation(demandCandidateMatch.isLineManagerRecommendation() ? false : true);
+        demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(demandCandidateMatchToUpdate);
+        return new ResponseEntity<>(demandCandidateMatch, HttpStatus.OK);
     }
 
 }
