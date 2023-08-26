@@ -2,6 +2,7 @@ package com.netcracker.hackathon.smartwfm.linemanager.controller;
 
 import com.netcracker.hackathon.smartwfm.linemanager.dao.Candidate;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.Demand;
+import com.netcracker.hackathon.smartwfm.linemanager.dao.DemandCandidateMatch;
 import com.netcracker.hackathon.smartwfm.linemanager.exception.CandidateNotFoundException;
 import com.netcracker.hackathon.smartwfm.linemanager.service.CandidateDaoService;
 import com.netcracker.hackathon.smartwfm.linemanager.service.DemandDaoService;
@@ -71,15 +72,7 @@ public class LineManagerReportsController {
     }
 
     @GetMapping("/candidates/match/{candidateId}")
-    public Candidate getMatchedDemandWithCandidateId(@PathVariable String candidateId) {
-        candidateDaoService.updateCandidateWithDemandCandidateMatchByCandidateId(candidateId);
-        Candidate candidateBydId = getCandidateBydId(candidateId);
-        return candidateBydId;
-    }
-
-    @GetMapping("/candidates/match")
-    public List<Candidate> getMatchedDemandForAllCandidates() {
-        candidateDaoService.updateCandidateWithDemandCandidateMatchForAllCandidates();
-        return candidateDaoService.getAvailableCandidates();
+    public List<DemandCandidateMatch> getMatchedDemandWithCandidateId(@PathVariable String candidateId) {
+        return candidateDaoService.getMatchedDemandsForCandidateById(candidateId);
     }
 }
