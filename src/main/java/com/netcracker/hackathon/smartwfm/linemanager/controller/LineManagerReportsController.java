@@ -3,6 +3,7 @@ package com.netcracker.hackathon.smartwfm.linemanager.controller;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.Candidate;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.Demand;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.DemandCandidateMatch;
+import com.netcracker.hackathon.smartwfm.linemanager.dao.LifecycleStatus;
 import com.netcracker.hackathon.smartwfm.linemanager.exception.CandidateNotFoundException;
 import com.netcracker.hackathon.smartwfm.linemanager.service.CandidateDaoService;
 import com.netcracker.hackathon.smartwfm.linemanager.service.DemandCandidateMatchDaoService;
@@ -41,6 +42,11 @@ public class LineManagerReportsController {
             throw new CandidateNotFoundException("Candidate with Id: " + Id + " is not found");
         }
         return candidate;
+    }
+
+    @GetMapping("candidates/statuses")
+    public List<LifecycleStatus> listOfLifeCycleStatus() {
+        return List.of(LifecycleStatus.values());
     }
 
     @GetMapping("/candidates/{lineManagerEmailId}")

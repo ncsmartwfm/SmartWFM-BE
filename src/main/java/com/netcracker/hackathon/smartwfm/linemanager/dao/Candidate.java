@@ -44,6 +44,9 @@ public class Candidate {
     @JsonProperty("city")
     private String city;
 
+    @JsonProperty("status")
+    private LifecycleStatus status = LifecycleStatus.AVAILABLE;
+
     public Candidate() {
     }
 
@@ -170,5 +173,13 @@ public class Candidate {
 
     public void setLineManagerEmailId(String lineManagerEmailId) {
         this.lineManagerEmailId = lineManagerEmailId;
+    }
+
+    public LifecycleStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(LifecycleStatus status) {
+        this.status = status;
     }
 }
