@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @JsonPropertyOrder({"demandId", "projectName", "projectRole", "desiredSkillSet",
-        "desiredYearsOfExperience", "domain", "location", "desiredLocation"})
+        "desiredYearsOfExperience", "domain", "location", "desiredLocations"})
 public class Demand {
     @Id
     @JsonProperty("demandId")
@@ -24,26 +24,11 @@ public class Demand {
     private Integer desiredYearsOfExperience;
     @JsonProperty("domain")
     private String domain;
-    @JsonProperty("location")
-    private String location;
-    @JsonProperty("desiredLocation")
-    private String desiredLocation;
+    @JsonProperty("desiredLocations")
+    private List<String> desiredLocations;
 
     public Demand() {
         // forJAXB serialization purpose
-    }
-
-    public Demand(String demandId, String projectName, String projectRole,
-                  List<String> desiredSkillSet, Integer desiredYearsOfExperience,
-                  String domain, String location, String desiredLocation) {
-        this.demandId = demandId;
-        this.projectName = projectName;
-        this.projectRole = projectRole;
-        this.desiredSkillSet = desiredSkillSet;
-        this.desiredYearsOfExperience = desiredYearsOfExperience;
-        this.domain = domain;
-        this.location = location;
-        this.desiredLocation = desiredLocation;
     }
 
     public String getDemandId() {
@@ -62,20 +47,12 @@ public class Demand {
         this.projectRole = projectRole;
     }
 
-    public String getDesiredLocation() {
-        return desiredLocation;
+    public List<String> getDesiredLocations() {
+        return desiredLocations;
     }
 
-    public void setDesiredLocation(String desiredLocation) {
-        this.desiredLocation = desiredLocation;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDesiredLocations(List<String> desiredLocations) {
+        this.desiredLocations = desiredLocations;
     }
 
     public String getProjectName() {
