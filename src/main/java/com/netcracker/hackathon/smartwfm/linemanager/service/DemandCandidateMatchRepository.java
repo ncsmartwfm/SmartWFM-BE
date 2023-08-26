@@ -8,5 +8,6 @@ import java.util.List;
 public interface DemandCandidateMatchRepository extends JpaRepository<DemandCandidateMatch, String> {
 
     public List<DemandCandidateMatch> findByCandidateId(String candidateId);
+    public DemandCandidateMatch findByCandidateIdAndDemandId(String candidateId, String demandId);
     public List<DemandCandidateMatch> findByDemandId(String demandId);
 }

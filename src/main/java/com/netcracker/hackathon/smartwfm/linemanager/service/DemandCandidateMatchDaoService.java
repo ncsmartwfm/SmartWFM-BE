@@ -15,6 +15,10 @@ public class DemandCandidateMatchDaoService {
         demandCandidateMatchRepository.save(demandCandidateMatch);
     }
 
+    public DemandCandidateMatch findByCandidateIdAndDemandId(String candidateId, String demandId) {
+        return demandCandidateMatchRepository.findByCandidateIdAndDemandId(candidateId, demandId);
+    }
+
     public List<DemandCandidateMatch> findListOfDemandCandidateMatchByCandidateOfficialId(String candidateId) {
      return demandCandidateMatchRepository.findByCandidateId(candidateId);
     }
