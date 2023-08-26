@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @JsonPropertyOrder({"candidateId", "firstName", "lastName", "domain",
         "skillSet", "yearsOfExperience", "yearOfExperienceInCurrentDomain",
         "candidateEmailId", "lineManagerOfficialId",
-        "lineManagerName", "lineManagerEmailId", "country", "city", "match"})
+        "lineManagerName", "lineManagerEmailId", "country", "city"})
 public class Candidate {
     @Id
     @JsonProperty("candidateId")
@@ -32,6 +33,7 @@ public class Candidate {
     @JsonProperty("candidateEmailId")
     private String candidateEmailId;
     @JsonProperty("lineManagerOfficialId")
+    @NotNull(message = "Line manager Id can't be null for a candidate")
     private String lineManagerId;
     @JsonProperty("lineManagerName")
     private String lineManagerName;
@@ -41,11 +43,6 @@ public class Candidate {
     private String country;
     @JsonProperty("city")
     private String city;
-
-    @JsonProperty("match")
-    @OneToMany
-    private List<DemandCandidateMatch> demandCandidateMatch;
-
 
     public Candidate() {
     }
@@ -175,11 +172,4 @@ public class Candidate {
         this.lineManagerEmailId = lineManagerEmailId;
     }
 
-    public List<DemandCandidateMatch> getDemandCandidateMatch() {
-        return demandCandidateMatch;
-    }
-
-    public void setDemandCandidateMatch(List<DemandCandidateMatch> demandCandidateMatch) {
-        this.demandCandidateMatch = demandCandidateMatch;
-    }
 }

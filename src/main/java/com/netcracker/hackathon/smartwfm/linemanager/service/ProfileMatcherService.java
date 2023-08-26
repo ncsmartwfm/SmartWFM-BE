@@ -13,8 +13,13 @@ public class ProfileMatcherService {
     @Autowired
     private DemandCandidateMatchRepository demandCandidateMatchRepository;
 
-    public DemandCandidateMatch calculateMatchingPercentage(Candidate candidate, Demand demand) {
+    public DemandCandidateMatch calculateCandidateDemandMatchingPercentage(Candidate candidate, Demand demand) {
         DemandCandidateMatch demandCandidateMatch = new DemandCandidateMatch();
+        demandCandidateMatch.setFirstName(candidate.getFirstName());
+        demandCandidateMatch.setLastName(candidate.getLastName());
+        demandCandidateMatch.setProjectName(demand.getProjectName());
+        demandCandidateMatch.setProjectRole(demand.getProjectRole());
+        demandCandidateMatch.setLineManagerRecommendation(false);
         List<String> candidateSkills = candidate.getSkillSet();
         int candidateExperience = candidate.getYearsOfExperience();
 
@@ -27,7 +32,7 @@ public class ProfileMatcherService {
         } else {
             experienceMatchPercentage = (double) candidateExperience / requiredExperience * 100;
         }
-        double overallMatchingPercentage = (skillMatchPercentage + experienceMatchPercentage) / 2;
+        int overallMatchingPercentage = (int) ((skillMatchPercentage + experienceMatchPercentage) / 2);
         demandCandidateMatch.setCandidateId(candidate.getCandidateId());
         demandCandidateMatch.setDemandId(demand.getDemandId());
         demandCandidateMatch.setMatchPercentage(overallMatchingPercentage);
@@ -35,10 +40,10 @@ public class ProfileMatcherService {
         return demandCandidateMatch;
     }
 
-    public int countMatchingSkills(List<String> candidateSkills, List<String> desiredSkills) {
+    public int countMatchingSkills(List<String> toBeMatchedSkills, List<String> toBeMatchedAgainstSkills) {
         int count = 0;
-        for (String skill : desiredSkills) {
-            if (candidateSkills.contains(skill)) {
+        for (String skill : toBeMatchedAgainstSkills) {
+            if (toBeMatchedSkills.contains(skill)) {
                 count++;
             }
         }

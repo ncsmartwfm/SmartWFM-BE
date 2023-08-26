@@ -45,7 +45,7 @@ public class CandidateDaoService {
         throw new CandidateNotFoundException("Candidate with Id " + Id + " does not exist");
     }
 
-    public void updateCandidateWithDemandCandidateMatchByCandidateId(String candidateId) {
+    public List<DemandCandidateMatch> getMatchedDemandsForCandidateById(String candidateId) {
         List<Demand> demands = demandRepository.findAll();
         Candidate candidate = getCandidateById(candidateId);
         if (candidate == null) {
@@ -53,22 +53,9 @@ public class CandidateDaoService {
         }
         List<DemandCandidateMatch> demandCandidateMatches = new ArrayList<>();
         for (Demand demand : demands) {
-            demandCandidateMatches.add(profileMatcherService.calculateMatchingPercentage(candidate, demand));
+            demandCandidateMatches.add(profileMatcherService.calculateCandidateDemandMatchingPercentage(candidate, demand));
         }
-        candidate.setDemandCandidateMatch(demandCandidateMatches);
-        candidateRepository.save(candidate);
-    }
-
-    public void updateCandidateWithDemandCandidateMatchForAllCandidates() {
-        List<Demand> demands = demandRepository.findAll();
-        List<Candidate> candidates = candidateRepository.findAll();
-
-        for (Candidate candidate : candidates) {
-            for (Demand demand : demands) {
-                profileMatcherService.calculateMatchingPercentage(candidate, demand);
-
-            }
-        }
+        return demandCandidateMatches;
     }
 
 }

@@ -3,6 +3,7 @@ package com.netcracker.hackathon.smartwfm.admin.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.netcracker.hackathon.smartwfm.admin.service.AttributeEncryptor;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class User {
     @JsonProperty("emailId")
     private String emailId;
     @JsonProperty("roles")
+    @NotNull(message = "Role cannot be empty for a user")
     private List<String> role;
 
     public User() {

@@ -10,33 +10,29 @@ public class DemandCandidateMatch {
     @Id
     @UuidGenerator
     private String Id;
-    @JsonProperty("demandId")
-    private String demandId;
     @JsonProperty("candidateId")
     private String candidateId;
+    @JsonProperty("firstName")
+    private String firstName;
+    @JsonProperty("lastName")
+    private String lastName;
+    @JsonProperty("demandId")
+    private String demandId;
+    @JsonProperty("projectName")
+    private String projectName;
+    @JsonProperty("projectRole")
+    private String projectRole;
     @JsonProperty("match")
-    private double matchPercentage;
+    private int matchPercentage;
+    @JsonProperty("recommendation")
+    private boolean LineManagerRecommendation;
 
-    public boolean isRecommended() {
-        return recommended;
+    public String getId() {
+        return Id;
     }
 
-    public void setRecommended(boolean recommended) {
-        this.recommended = recommended;
-    }
-
-    @JsonProperty("recommended")
-    private boolean recommended;
-
-    public DemandCandidateMatch() {
-    }
-
-    public String getDemandId() {
-        return demandId;
-    }
-
-    public void setDemandId(String demandId) {
-        this.demandId = demandId;
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getCandidateId() {
@@ -47,11 +43,59 @@ public class DemandCandidateMatch {
         this.candidateId = candidateId;
     }
 
-    public double getMatchPercentage() {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getDemandId() {
+        return demandId;
+    }
+
+    public void setDemandId(String demandId) {
+        this.demandId = demandId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectRole() {
+        return projectRole;
+    }
+
+    public void setProjectRole(String projectRole) {
+        this.projectRole = projectRole;
+    }
+
+    public int getMatchPercentage() {
         return matchPercentage;
     }
 
-    public void setMatchPercentage(double matchPercentage) {
+    public void setMatchPercentage(int matchPercentage) {
         this.matchPercentage = matchPercentage;
+    }
+
+    public boolean isLineManagerRecommendation() {
+        return LineManagerRecommendation;
+    }
+
+    public void setLineManagerRecommendation(boolean lineManagerRecommendation) {
+        LineManagerRecommendation = lineManagerRecommendation;
     }
 }
