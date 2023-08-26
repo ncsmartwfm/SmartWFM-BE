@@ -4,6 +4,7 @@ import com.netcracker.hackathon.smartwfm.linemanager.dao.Candidate;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.Demand;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.DemandCandidateMatch;
 import com.netcracker.hackathon.smartwfm.linemanager.exception.CandidateNotFoundException;
+import com.netcracker.hackathon.smartwfm.linemanager.exception.DemandNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -101,6 +101,11 @@ public class LineManagerReportsController {
         return candidateDaoService.getMatchedDemandsForCandidateById(candidateId);
     }
 
+    @GetMapping("/demands/match/{demandId}")
+    public List<DemandCandidateMatch> getMatchedCandidatesWithDemandId(@PathVariable String demandId) {
+        return demandDaoService.getMatchedCandidatesForDemandById(demandId);
+    }
+
     @PutMapping("candidates/match")
     public ResponseEntity<DemandCandidateMatch> updateLineManagerRecommendation(@RequestBody DemandCandidateMatch demandCandidateMatch) {
         DemandCandidateMatch demandCandidateMatchToUpdate = demandCandidateMatchDaoService.findByCandidateIdAndDemandId(demandCandidateMatch.getCandidateId(), demandCandidateMatch.getDemandId());
@@ -112,7 +117,7 @@ public class LineManagerReportsController {
             updatedDemandCandidateMatch.setRecommendation(true);
         }
         demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(updatedDemandCandidateMatch);
-        return new ResponseEntity<>(demandCandidateMatch, HttpStatus.OK);
+        return new ResponseEntity<>(updatedDemandCandidateMatch, HttpStatus.OK);
     }
 
 }
