@@ -1,6 +1,6 @@
-package com.netcracker.hackathon.smartwfm.common.service;
+package com.netcracker.hackathon.smartwfm.admin.service;
 
-import com.netcracker.hackathon.smartwfm.common.model.User;
+import com.netcracker.hackathon.smartwfm.admin.model.User;
 import com.netcracker.hackathon.smartwfm.linemanager.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
-package com.netcracker.hackathon.smartwfm.common.controller;
+package com.netcracker.hackathon.smartwfm.admin.controller;
 
-import com.netcracker.hackathon.smartwfm.common.service.CalendarRequest;
-import com.netcracker.hackathon.smartwfm.common.service.MailCalendarService;
+import com.netcracker.hackathon.smartwfm.admin.service.CalendarRequest;
+import com.netcracker.hackathon.smartwfm.admin.service.MailCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

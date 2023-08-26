@@ -1,4 +1,4 @@
-package com.netcracker.hackathon.smartwfm.common.service;
+package com.netcracker.hackathon.smartwfm.admin.service;
 
 import jakarta.activation.DataHandler;
 import jakarta.mail.BodyPart;

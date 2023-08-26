@@ -1,7 +1,7 @@
-package com.netcracker.hackathon.smartwfm.common.controller;
+package com.netcracker.hackathon.smartwfm.admin.controller;
 
-import com.netcracker.hackathon.smartwfm.common.model.User;
-import com.netcracker.hackathon.smartwfm.common.service.UserDaoService;
+import com.netcracker.hackathon.smartwfm.admin.model.User;
+import com.netcracker.hackathon.smartwfm.admin.service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

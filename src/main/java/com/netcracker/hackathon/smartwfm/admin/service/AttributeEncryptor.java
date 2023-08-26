@@ -1,4 +1,4 @@
-package com.netcracker.hackathon.smartwfm.common.service;
+package com.netcracker.hackathon.smartwfm.admin.service;
 
 import jakarta.persistence.AttributeConverter;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
-package com.netcracker.hackathon.smartwfm.common.model;
+package com.netcracker.hackathon.smartwfm.admin.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.netcracker.hackathon.smartwfm.common.service.AttributeEncryptor;
+import com.netcracker.hackathon.smartwfm.admin.service.AttributeEncryptor;
 import jakarta.persistence.*;
 
 import java.util.List;

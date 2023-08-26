@@ -1,4 +1,4 @@
-package com.netcracker.hackathon.smartwfm.common.service;
+package com.netcracker.hackathon.smartwfm.admin.service;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
