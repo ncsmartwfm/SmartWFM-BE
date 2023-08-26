@@ -13,7 +13,7 @@ import java.util.List;
 @JsonPropertyOrder({"candidateId", "firstName", "lastName", "domain",
         "skillSet", "yearsOfExperience", "yearOfExperienceInCurrentDomain",
         "candidateEmailId", "lineManagerOfficialId",
-        "lineManagerName", "lineManagerEmailId", "country", "city"})
+        "lineManagerName", "lineManagerEmailId", "country", "city", "status"})
 public class Candidate {
     @Id
     @JsonProperty("candidateId")
@@ -43,6 +43,9 @@ public class Candidate {
     private String country;
     @JsonProperty("city")
     private String city;
+
+    @JsonProperty("status")
+    private LifeCycleStatus lifecycleStatus;
 
     public Candidate() {
     }
@@ -172,4 +175,11 @@ public class Candidate {
         this.lineManagerEmailId = lineManagerEmailId;
     }
 
+    public LifeCycleStatus getLifecycleStatus() {
+        return lifecycleStatus;
+    }
+
+    public void setLifecycleStatus(LifeCycleStatus lifecycleStatus) {
+        this.lifecycleStatus = lifecycleStatus;
+    }
 }
