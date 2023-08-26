@@ -2,6 +2,7 @@ package com.netcracker.hackathon.smartwfm.linemanager.dao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -19,6 +20,7 @@ public class Candidate {
     @Id
     @JsonProperty("candidateId")
     @Size(min = 6, max = 7)
+    @Column(unique = true, nullable = false)
     private String candidateId;
     @JsonProperty("firstName")
     private String firstName;
@@ -33,6 +35,7 @@ public class Candidate {
     @JsonProperty("yearOfExperienceInCurrentDomain")
     private Integer yearOfExperienceInCurrentDomain;
     @JsonProperty("candidateEmailId")
+    @Column(unique = true, nullable = false)
     private String candidateEmailId;
     @JsonProperty("lineManagerOfficialId")
     @NotNull(message = "Line manager Id can't be null for a candidate")
