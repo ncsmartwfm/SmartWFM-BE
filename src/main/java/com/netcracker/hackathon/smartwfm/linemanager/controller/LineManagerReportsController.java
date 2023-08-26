@@ -107,17 +107,16 @@ public class LineManagerReportsController {
     }
 
     @PutMapping("candidates/match")
-    public ResponseEntity<DemandCandidateMatch> updateLineManagerRecommendation(@RequestBody DemandCandidateMatch demandCandidateMatch) {
-        DemandCandidateMatch demandCandidateMatchToUpdate = demandCandidateMatchDaoService.findByCandidateIdAndDemandId(demandCandidateMatch.getCandidateId(), demandCandidateMatch.getDemandId());
-        DemandCandidateMatch updatedDemandCandidateMatch = demandCandidateMatch;
-        if(null != demandCandidateMatchToUpdate) {
-            demandCandidateMatchToUpdate.setRecommendation(demandCandidateMatchToUpdate.isRecommendation() ? false : true);
-            updatedDemandCandidateMatch = demandCandidateMatchToUpdate;
-        } else {
-            updatedDemandCandidateMatch.setRecommendation(true);
-        }
-        demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(updatedDemandCandidateMatch);
-        return new ResponseEntity<>(updatedDemandCandidateMatch, HttpStatus.OK);
+    public List<DemandCandidateMatch> updateLineManagerRecommendation(@RequestBody DemandCandidateMatch demandCandidateMatch) {
+        List<DemandCandidateMatch> demandCandidateMatchesWithLMRecommendationFlag = candidateDaoService
+                .getMatchedDemandsForCandidateById(demandCandidateMatch.getCandidateId());
+        demandCandidateMatchesWithLMRecommendationFlag
+                .stream()
+                .filter(e -> e.getDemandId().equalsIgnoreCase(demandCandidateMatch.getDemandId()))
+                .forEach(e->e.setRecommendation(true));
+        demandCandidateMatchesWithLMRecommendationFlag.stream()
+                .forEach(e->demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(e));
+        return demandCandidateMatchesWithLMRecommendationFlag;
     }
 
 }

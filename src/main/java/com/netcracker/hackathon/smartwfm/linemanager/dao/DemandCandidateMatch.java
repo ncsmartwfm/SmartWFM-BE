@@ -98,4 +98,19 @@ public class DemandCandidateMatch {
     public void setRecommendation(boolean recommendation) {
         this.recommendation = recommendation;
     }
+
+    @Override
+    public String toString() {
+        return "DemandCandidateMatch{" +
+                "Id='" + Id + '\'' +
+                ", candidateId='" + candidateId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", demandId='" + demandId + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", projectRole='" + projectRole + '\'' +
+                ", matchPercentage=" + matchPercentage +
+                ", recommendation=" + recommendation +
+                '}';
+    }
 }
