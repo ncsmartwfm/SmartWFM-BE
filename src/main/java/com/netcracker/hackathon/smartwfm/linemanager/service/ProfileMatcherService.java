@@ -19,7 +19,7 @@ public class ProfileMatcherService {
         demandCandidateMatch.setLastName(candidate.getLastName());
         demandCandidateMatch.setProjectName(demand.getProjectName());
         demandCandidateMatch.setProjectRole(demand.getProjectRole());
-        demandCandidateMatch.setLineManagerRecommendation(false);
+        demandCandidateMatch.setRecommendation(false);
         List<String> candidateSkills = candidate.getSkillSet();
         int candidateExperience = candidate.getYearsOfExperience();
 
@@ -36,7 +36,6 @@ public class ProfileMatcherService {
         demandCandidateMatch.setCandidateId(candidate.getCandidateId());
         demandCandidateMatch.setDemandId(demand.getDemandId());
         demandCandidateMatch.setMatchPercentage(overallMatchingPercentage);
-        demandCandidateMatchRepository.save(demandCandidateMatch);
         return demandCandidateMatch;
     }
 

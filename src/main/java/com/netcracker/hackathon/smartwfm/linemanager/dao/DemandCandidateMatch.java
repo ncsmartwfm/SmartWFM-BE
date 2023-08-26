@@ -25,7 +25,7 @@ public class DemandCandidateMatch {
     @JsonProperty("match")
     private int matchPercentage;
     @JsonProperty("recommendation")
-    private boolean LineManagerRecommendation = false;
+    private boolean recommendation = false;
 
     public String getId() {
         return Id;
@@ -91,11 +91,11 @@ public class DemandCandidateMatch {
         this.matchPercentage = matchPercentage;
     }
 
-    public boolean isLineManagerRecommendation() {
-        return LineManagerRecommendation;
+    public boolean isRecommendation() {
+        return recommendation;
     }
 
-    public void setLineManagerRecommendation(boolean lineManagerRecommendation) {
-        LineManagerRecommendation = lineManagerRecommendation;
+    public void setRecommendation(boolean recommendation) {
+        this.recommendation = recommendation;
     }
 }
