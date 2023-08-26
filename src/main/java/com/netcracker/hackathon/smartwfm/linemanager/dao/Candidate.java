@@ -13,7 +13,7 @@ import java.util.List;
 @JsonPropertyOrder({"candidateId", "firstName", "lastName", "domain",
         "skillSet", "yearsOfExperience", "yearOfExperienceInCurrentDomain",
         "candidateEmailId", "lineManagerOfficialId",
-        "lineManagerName", "lineManagerEmailId", "country", "city", "status"})
+        "lineManagerName", "lineManagerEmailId", "country", "city"})
 public class Candidate {
     @Id
     @JsonProperty("candidateId")
