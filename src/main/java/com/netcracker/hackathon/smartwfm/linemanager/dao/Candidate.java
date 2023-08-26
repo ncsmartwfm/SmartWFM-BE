@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class Candidate {
     @Id
     @JsonProperty("candidateId")
+    @Size(min = 6, max = 7)
     private String candidateId;
     @JsonProperty("firstName")
     private String firstName;
@@ -43,7 +45,6 @@ public class Candidate {
     private String country;
     @JsonProperty("city")
     private String city;
-
     @JsonProperty("status")
     private LifecycleStatus status = LifecycleStatus.AVAILABLE;
 
