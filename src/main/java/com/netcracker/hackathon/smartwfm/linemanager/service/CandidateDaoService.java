@@ -37,6 +37,18 @@ public class CandidateDaoService {
         throw new CandidateNotFoundException("Candidate with Id: " + Id + " does not exist");
     }
 
+    public List<Candidate> getCandidatesByLineManagerEmailId(String emailId) {
+        return candidateRepository.findByLineManagerEmailId(emailId);
+    }
+
+    public Candidate getCandidateByEmailId(String emailId) {
+        Candidate candidate = candidateRepository.findByCandidateEmailId(emailId);
+        if (candidate != null) {
+            return candidate;
+        }
+        throw new CandidateNotFoundException("Candidate with emailId: " + emailId + " does not exist");
+    }
+
     public void deleteCandidateById(String Id) {
         Optional<Candidate> candidateOptional = candidateRepository.findById(Id);
         if (candidateOptional.isPresent()) {
