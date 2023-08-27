@@ -31,15 +31,19 @@ public class UserDaoService {
     public void save(User user) {
         // TODO Logic to generate random password
         userRepository.save(user);
-        mailCalendarService.sendSimpleEmail(
-                new CalendarRequest.Builder()
-                        .withSubject("Your SMARTWFM Account has been created")
-                        .withBody("Hello " + user.getUserName() + ", Your SMARTWFM account has been created. please login using username: " +
-                                user.getEmailId() +" and password: " + user.getPassword())
-                        .withFromEmail(fromEmail)
-                        .withToEmail("sandip.magar@netcracker.com")
-                        .build()
-        );
+        try {
+            mailCalendarService.sendSimpleEmail(
+                    new CalendarRequest.Builder()
+                            .withSubject("Your SMARTWFM Account has been created")
+                            .withBody("Hello " + user.getUserName() + ", Your SMARTWFM account has been created. please login using username: " +
+                                    user.getEmailId() + " and password: " + user.getPassword())
+                            .withFromEmail(fromEmail)
+                            .withToEmail("sandip.magar@netcracker.com")
+                            .build()
+            );
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
 
     }
 }
