@@ -22,14 +22,16 @@ public class UserDaoService {
     @Autowired
     private MailCalendarService mailCalendarService;
 
-    // TODO go for password Encryption from the UI and set the encrypted password
-    // TODO in the table instead of plain string
     public User getAuthenticatedUser(String emailId, String password) {
         User user = userRepository.findUserByEmailId(emailId);
         if (user.getPassword().equals(password)) {
             return user;
         }
         throw new UserNotFoundException("User's credentials are invalid");
+    }
+
+    public User getUserByEmailId(String email) {
+        return userRepository.findUserByEmailId(email);
     }
 
     public void save(User user) {
