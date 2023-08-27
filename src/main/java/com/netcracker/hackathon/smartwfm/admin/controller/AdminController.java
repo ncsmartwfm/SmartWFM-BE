@@ -31,4 +31,13 @@ public class AdminController {
         User user = userDaoService.getAuthenticatedUser(emailId, password);
         return user.getRole();
     }
+
+    @GetMapping("/user")
+    public ResponseEntity<User> getUserByEmailId(@RequestParam String emailId) {
+        User user = userDaoService.getUserByEmailId(emailId);
+        if(null != user) {
+            return ResponseEntity.ok(user);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
 }
