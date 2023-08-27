@@ -19,7 +19,7 @@ public class DemandCandidateMatchDaoService {
         return demandCandidateMatchRepository.findByCandidateIdAndDemandId(candidateId, demandId);
     }
 
-    public List<DemandCandidateMatch> findListOfDemandCandidateMatchByCandidateOfficialId(String candidateId) {
+    public List<DemandCandidateMatch> findByCandidateId(String candidateId) {
      return demandCandidateMatchRepository.findByCandidateId(candidateId);
     }
 

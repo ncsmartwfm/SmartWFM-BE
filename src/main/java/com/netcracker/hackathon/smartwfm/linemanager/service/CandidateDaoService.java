@@ -22,6 +22,9 @@ public class CandidateDaoService {
     @Autowired
     private DemandRepository demandRepository;
 
+    @Autowired
+    private DemandCandidateMatchDaoService demandCandidateMatchDaoService;
+
     public void save(Candidate candidate) {
         candidateRepository.save(candidate);
     }
@@ -59,16 +62,20 @@ public class CandidateDaoService {
     }
 
     public List<DemandCandidateMatch> getMatchedDemandsForCandidateById(String candidateId) {
-        List<Demand> demands = demandRepository.findAll();
-        Candidate candidate = getCandidateById(candidateId);
-        if (candidate == null) {
-            throw new CandidateNotFoundException("Candidate with Id " + candidateId + " does not exist");
+        List<DemandCandidateMatch> candidateFromDB = demandCandidateMatchDaoService.findByCandidateId(candidateId);
+        if (candidateFromDB.isEmpty()) {
+            List<Demand> demands = demandRepository.findAll();
+            Candidate candidate = getCandidateById(candidateId);
+            if (candidate == null) {
+                throw new CandidateNotFoundException("Candidate with Id " + candidateId + " does not exist");
+            }
+            List<DemandCandidateMatch> demandCandidateMatches = new ArrayList<>();
+            for (Demand demand : demands) {
+                demandCandidateMatches.add(profileMatcherService.calculateCandidateDemandMatchingPercentage(candidate, demand));
+            }
+            return demandCandidateMatches;
         }
-        List<DemandCandidateMatch> demandCandidateMatches = new ArrayList<>();
-        for (Demand demand : demands) {
-            demandCandidateMatches.add(profileMatcherService.calculateCandidateDemandMatchingPercentage(candidate, demand));
-        }
-        return demandCandidateMatches;
+        return candidateFromDB;
     }
 
 }

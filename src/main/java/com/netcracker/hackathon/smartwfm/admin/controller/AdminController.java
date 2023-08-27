@@ -32,9 +32,9 @@ public class AdminController {
         return user.getRole();
     }
 
-    @GetMapping("/users/{emailId}")
-    public ResponseEntity<User> getUserByEmailId(@PathVariable String email) {
-        User user = userDaoService.getUserByEmailId(email);
+    @GetMapping("/user")
+    public ResponseEntity<User> getUserByEmailId(@RequestParam String emailId) {
+        User user = userDaoService.getUserByEmailId(emailId);
         if(null != user) {
             return ResponseEntity.ok(user);
         }
