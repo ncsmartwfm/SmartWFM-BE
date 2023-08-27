@@ -1,22 +1,20 @@
 package com.netcracker.hackathon.smartwfm.linemanager.dao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import org.hibernate.annotations.UuidGenerator;
+import jakarta.persistence.*;
 
 @Entity
+@IdClass(DemandCandidateMatchId.class)
 public class DemandCandidateMatch {
-    @Id
-    @UuidGenerator
-    private String Id;
     @JsonProperty("candidateId")
+    @Id
     private String candidateId;
     @JsonProperty("firstName")
     private String firstName;
     @JsonProperty("lastName")
     private String lastName;
     @JsonProperty("demandId")
+    @Id
     private String demandId;
     @JsonProperty("projectName")
     private String projectName;
@@ -28,15 +26,7 @@ public class DemandCandidateMatch {
     private boolean recommendation = false;
 
     @JsonProperty("status")
-    private LifecycleStatus lifecycleStatus;
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
-    }
+    private String lifecycleStatus;
 
     public String getCandidateId() {
         return candidateId;
@@ -102,27 +92,11 @@ public class DemandCandidateMatch {
         this.recommendation = recommendation;
     }
 
-    public LifecycleStatus getLifecycleStatus() {
+    public String getLifecycleStatus() {
         return lifecycleStatus;
     }
 
-    public void setLifecycleStatus(LifecycleStatus lifecycleStatus) {
+    public void setLifecycleStatus(String lifecycleStatus) {
         this.lifecycleStatus = lifecycleStatus;
-    }
-
-    @Override
-    public String toString() {
-        return "DemandCandidateMatch{" +
-                "Id='" + Id + '\'' +
-                ", candidateId='" + candidateId + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", demandId='" + demandId + '\'' +
-                ", projectName='" + projectName + '\'' +
-                ", projectRole='" + projectRole + '\'' +
-                ", matchPercentage=" + matchPercentage +
-                ", recommendation=" + recommendation +
-                ", lifecycleStatus=" + lifecycleStatus +
-                '}';
     }
 }

@@ -3,7 +3,7 @@ package com.netcracker.hackathon.smartwfm.linemanager.controller;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.Candidate;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.Demand;
 import com.netcracker.hackathon.smartwfm.linemanager.dao.DemandCandidateMatch;
-import com.netcracker.hackathon.smartwfm.linemanager.dao.LifecycleStatus;
+import com.netcracker.hackathon.smartwfm.linemanager.dao.LifeCycleStatus;
 import com.netcracker.hackathon.smartwfm.linemanager.exception.CandidateNotFoundException;
 import com.netcracker.hackathon.smartwfm.linemanager.service.CandidateDaoService;
 import com.netcracker.hackathon.smartwfm.linemanager.service.DemandCandidateMatchDaoService;
@@ -14,7 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class LineManagerReportsController {
@@ -45,8 +48,17 @@ public class LineManagerReportsController {
     }
 
     @GetMapping("candidates/statuses")
-    public List<LifecycleStatus> listOfLifeCycleStatus() {
-        return List.of(LifecycleStatus.values());
+    public List<String> listOfLifeCycleStatus() {
+        return Arrays.stream(LifeCycleStatus.class.getDeclaredFields())
+                .filter(field -> Modifier.isStatic(field.getModifiers()))
+                .map(field -> {
+                    try {
+                        return (String) field.get(LifeCycleStatus.class);
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/candidates/{lineManagerEmailId}")
@@ -123,7 +135,7 @@ public class LineManagerReportsController {
     public List<DemandCandidateMatch> sendForDOApproval(@RequestBody DemandCandidateMatch demandCandidateMatch) {
         DemandCandidateMatch updatedObj = demandCandidateMatchDaoService.findByCandidateIdAndDemandId(
                 demandCandidateMatch.getCandidateId(), demandCandidateMatch.getDemandId());
-        updatedObj.setLifecycleStatus(LifecycleStatus.WAITING_FOR_DO_APPROVAL);
+        updatedObj.setLifecycleStatus(LifeCycleStatus.WAITING_FOR_DO_APPROVAL);
         demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(updatedObj);
         return demandCandidateMatchDaoService.findByCandidateId(demandCandidateMatch.getCandidateId());
     }
