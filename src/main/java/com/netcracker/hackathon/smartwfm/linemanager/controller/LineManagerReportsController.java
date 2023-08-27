@@ -113,10 +113,19 @@ public class LineManagerReportsController {
         demandCandidateMatchesWithLMRecommendationFlag
                 .stream()
                 .filter(e -> e.getDemandId().equalsIgnoreCase(demandCandidateMatch.getDemandId()))
-                .forEach(e->e.setRecommendation(true));
+                .forEach(e -> e.setRecommendation(true));
         demandCandidateMatchesWithLMRecommendationFlag.stream()
-                .forEach(e->demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(e));
+                .forEach(e -> demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(e));
         return demandCandidateMatchesWithLMRecommendationFlag;
+    }
+
+    @PutMapping("candidate/sendForDOApproval")
+    public List<DemandCandidateMatch> sendForDOApproval(@RequestBody DemandCandidateMatch demandCandidateMatch) {
+        DemandCandidateMatch updatedObj = demandCandidateMatchDaoService.findByCandidateIdAndDemandId(
+                demandCandidateMatch.getCandidateId(), demandCandidateMatch.getDemandId());
+        updatedObj.setLifecycleStatus(LifecycleStatus.WAITING_FOR_DO_APPROVAL);
+        demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(updatedObj);
+        return demandCandidateMatchDaoService.findByCandidateId(demandCandidateMatch.getCandidateId());
     }
 
 }

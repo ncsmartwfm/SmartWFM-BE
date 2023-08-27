@@ -27,6 +27,9 @@ public class DemandCandidateMatch {
     @JsonProperty("recommendation")
     private boolean recommendation = false;
 
+    @JsonProperty("status")
+    private LifecycleStatus lifecycleStatus;
+
     public String getId() {
         return Id;
     }
@@ -99,6 +102,14 @@ public class DemandCandidateMatch {
         this.recommendation = recommendation;
     }
 
+    public LifecycleStatus getLifecycleStatus() {
+        return lifecycleStatus;
+    }
+
+    public void setLifecycleStatus(LifecycleStatus lifecycleStatus) {
+        this.lifecycleStatus = lifecycleStatus;
+    }
+
     @Override
     public String toString() {
         return "DemandCandidateMatch{" +
@@ -111,6 +122,7 @@ public class DemandCandidateMatch {
                 ", projectRole='" + projectRole + '\'' +
                 ", matchPercentage=" + matchPercentage +
                 ", recommendation=" + recommendation +
+                ", lifecycleStatus=" + lifecycleStatus +
                 '}';
     }
 }
