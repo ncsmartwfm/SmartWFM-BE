@@ -25,7 +25,7 @@ public class MailCalendarService {
         this.mailSender = mailSender;
     }
 
-    public void sendSimpleEmail( CalendarRequest calendarRequest){
+    public void sendSimpleEmail(CalendarRequest calendarRequest) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(calendarRequest.getFromEmail());
         message.setTo(calendarRequest.getToEmail());
@@ -40,7 +40,7 @@ public class MailCalendarService {
         mimeMessage.addHeaderLine("charset=UTF-8");
         mimeMessage.addHeaderLine("component=VEVENT");
         mimeMessage.setFrom(fromEmail);
-        mimeMessage.addRecipients(Message.RecipientType.TO,calendarRequest.getToEmail());
+        mimeMessage.addRecipients(Message.RecipientType.TO, calendarRequest.getToEmail());
         mimeMessage.setSubject(calendarRequest.getSubject());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HHmmss");
         StringBuilder builder = new StringBuilder();
@@ -55,8 +55,8 @@ public class MailCalendarService {
                 "ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:" + calendarRequest.getToEmail() + "\n" +
                 "ORGANIZER;CN=" + fromEmail + ":MAILTO:" + fromEmail + "\n" +
                 "DESCRIPTION;LANGUAGE=en-US:" + calendarRequest.getBody() + "\n" +
-                "UID:" + calendarRequest.getUid()+"\n" +
-                "SUMMARY;LANGUAGE=en-US:"+ calendarRequest.getSubject() + "\n" +
+                "UID:" + calendarRequest.getUid() + "\n" +
+                "SUMMARY;LANGUAGE=en-US:" + calendarRequest.getSubject() + "\n" +
                 "DTSTART:" + formatter.format(calendarRequest.getMeetingStartTime()).replace(" ", "T") + "\n" +
                 "DTEND:" + formatter.format(calendarRequest.getMeetingEndTime()).replace(" ", "T") + "\n" +
                 "CLASS:PUBLIC\n" +
@@ -92,6 +92,20 @@ public class MailCalendarService {
         mailSender.send(mimeMessage);
         System.out.println("Calendar invite sent");
 
+    }
+
+    public void sendMailNotification(String subject, String body, String from, String to) {
+        try {
+            sendSimpleEmail(
+                    new CalendarRequest.Builder()
+                            .withSubject(subject)
+                            .withBody(body)
+                            .withFromEmail(from)
+                            .withToEmail(to)
+                            .build());
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
 }

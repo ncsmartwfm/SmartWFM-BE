@@ -17,7 +17,11 @@ public class AdminController {
 
     @PostMapping("/users")
     public ResponseEntity<User> save(@Validated @RequestBody User user) {
-        userDaoService.save(user);
+        try {
+            userDaoService.save(user);
+        } catch (Exception ex) {
+            return (ResponseEntity<User>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
