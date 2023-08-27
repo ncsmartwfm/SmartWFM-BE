@@ -35,15 +35,16 @@ public class UserDaoService {
     }
 
     public void save(User user) {
-        String password = randomPasswordGenerator.generateRandomPassword(6);
+        //String password = randomPasswordGenerator.generateRandomPassword(6);
+        String password = "netcracker";
         user.setPassword(password);
-        try {
+        userRepository.save(user);
+        /*try {
             String body = "Hello " + user.getUserName() + ", Your SMARTWFM account has been created. please login using username: " +
                     user.getEmailId() + " and password: " + password;
             mailCalendarService.sendMailNotification(SMARTWFM_ACCOUNT_CREATED, body, fromEmail, "manvendrav@gmail.com");
         } catch (Exception exception) {
-            throw exception;
-        }
-        userRepository.save(user);
+           // throw exception;
+        }*/
     }
 }

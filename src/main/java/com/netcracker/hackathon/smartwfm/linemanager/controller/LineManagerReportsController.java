@@ -140,4 +140,12 @@ public class LineManagerReportsController {
         return demandCandidateMatchDaoService.findByCandidateId(demandCandidateMatch.getCandidateId());
     }
 
+    @PutMapping("candidate/approvedbyDO")
+    public List<DemandCandidateMatch> approvedByDO(@RequestBody DemandCandidateMatch demandCandidateMatch) {
+        DemandCandidateMatch updatedObj = demandCandidateMatchDaoService.findByCandidateIdAndDemandId(
+                demandCandidateMatch.getCandidateId(), demandCandidateMatch.getDemandId());
+        updatedObj.setLifecycleStatus(LifeCycleStatus.APPROVED_BY_DO);
+        demandCandidateMatchDaoService.saveDemandCandidateMatchRecord(updatedObj);
+        return demandCandidateMatchDaoService.findByCandidateId(demandCandidateMatch.getCandidateId());
+    }
 }
