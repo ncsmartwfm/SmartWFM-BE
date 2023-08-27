@@ -25,12 +25,12 @@ public class DemandCandidateMatchDaoService {
 
     public void saveDemandCandidateMatchRecord(DemandCandidateMatch demandCandidateMatch) {
         if (LifeCycleStatus.WAITING_FOR_DO_APPROVAL.equals(demandCandidateMatch.getLifecycleStatus()))
-        try {
+        /*try {
             String body = "Hello Sandip, Please provide your approval on SMARTWFM for Demand to schedule interview ";
             mailCalendarService.sendMailNotification(SMARTWFM_DO_APPROVAL_SENT, body, fromEmail, "manvendrav@gmail.com");
         } catch (Exception exception) {
             throw exception;
-        }
+        }*/
         demandCandidateMatchRepository.save(demandCandidateMatch);
     }
 
